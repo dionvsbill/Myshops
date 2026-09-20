@@ -1,0 +1,1 @@
+export default function NewProduct(){return <div className="container py-10"><h1 className="text-3xl font-black">New product</h1><p className="mt-3 text-slate-600">Use the protected product API to create catalog records; all server validation and database constraints apply.</p></div>}
