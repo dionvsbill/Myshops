@@ -1,0 +1,1 @@
+export default function Settings(){return <div className="container py-10"><h1 className="text-3xl font-black">Settings</h1><p className="mt-3 text-slate-600">Production settings are controlled by Supabase and Render environment variables.</p></div>}
