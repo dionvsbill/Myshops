@@ -1,0 +1,1 @@
+export default function Privacy(){return <div className="container max-w-3xl py-12"><h1 className="text-3xl font-black">Privacy Policy</h1><p className="mt-5">Myshop uses account, delivery and order information to provide ecommerce services, process payments and support customers.</p></div>}
