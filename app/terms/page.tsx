@@ -1,0 +1,1 @@
+export default function Terms(){return <div className="container max-w-3xl py-12"><h1 className="text-3xl font-black">Terms</h1><p className="mt-5">Customers are responsible for accurate account and delivery information. Product availability and delivery timing may vary.</p></div>}
