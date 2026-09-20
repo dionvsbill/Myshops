@@ -1,0 +1,4 @@
+-- Canonical Myshop schema is installed in Supabase project nniszrjynnlrvrovcwgb.
+-- The connected deployment migration contains the executable schema, RLS policies, storage buckets,
+-- checkout transaction function and supporting checkout-intents table. Keep this file synchronized
+-- with the production migration when exporting a fresh database.
