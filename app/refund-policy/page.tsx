@@ -1,0 +1,1 @@
+export default function Refund(){return <div className="container max-w-3xl py-12"><h1 className="text-3xl font-black">Refund Policy</h1><p className="mt-5">Refund requests are reviewed against the condition of the product, payment record and applicable consumer terms.</p></div>}
