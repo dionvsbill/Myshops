@@ -1,0 +1,1 @@
+export default function Shipping(){return <div className="container max-w-3xl py-12"><h1 className="text-3xl font-black">Shipping Policy</h1><p className="mt-5">Delivery arrangements depend on destination, product availability and confirmed payment.</p></div>}
