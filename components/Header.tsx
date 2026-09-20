@@ -1,2 +1,54 @@
-'use client'; import Link from 'next/link'; import {Search,ShoppingCart,Heart,User} from 'lucide-react'; import {useEffect,useState} from 'react'; import {createClient} from '@/lib/supabase/client';
-export function Header(){const [count,setCount]=useState(0);useEffect(()=>{const load=async()=>{const s=createClient();const {data:{user}}=await s.auth.getUser();if(user){const {data}=await s.from('cart_items').select('quantity').eq('user_id',user.id);setCount((data||[]).reduce((a,x)=>a+x.quantity,0));}};load();},[]);return <header className="sticky top-0 z-30 border-b bg-white"><div className="container flex h-16 items-center gap-4"><Link href="/" className="text-2xl font-black text-brand-600">MYSHOP</Link><form action="/search" className="hidden flex-1 md:flex"><input name="q" placeholder="Search products, brands and categories" className="w-full rounded-l-xl border px-4 py-2"/><button className="rounded-r-xl bg-slate-900 px-4 text-white"><Search size={20}/></button></form><nav className="ml-auto flex items-center gap-4"><Link href="/wishlist"><Heart size={21}/></Link><Link href="/cart" className="relative"><ShoppingCart size={21}/>{count>0&&<span className="absolute -right-3 -top-3 rounded-full bg-brand-600 px-1.5 text-xs text-white">{count}</span>}</Link><Link href="/account"><User size={21}/></Link></nav></div></header>}
+'use client';
+
+import Link from 'next/link';
+import {Search, ShoppingCart, Heart, User} from 'lucide-react';
+import {useEffect, useState} from 'react';
+import {createClient} from '@/lib/supabase/client';
+
+export function Header() {
+  const [count, setCount] = useState(0);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      const s = createClient();
+      const {data: {user}} = await s.auth.getUser();
+      setSignedIn(!!user);
+      if (user) {
+        const {data} = await s.from('cart_items').select('quantity').eq('user_id', user.id);
+        setCount((data ?? []).reduce((a, x) => a + Number(x.quantity ?? 0), 0));
+      }
+    };
+    load();
+  }, []);
+
+  return (
+    <header className="sticky top-0 z-30 border-b bg-white">
+      <div className="container flex h-16 items-center gap-4">
+        <Link href="/" className="text-2xl font-black text-brand-600">MYSHOP</Link>
+
+        <form action="/search" className="hidden flex-1 md:flex">
+          <input name="q" placeholder="Search products, brands and categories" className="w-full rounded-l-xl border px-4 py-2" />
+          <button className="rounded-r-xl bg-slate-900 px-4 text-white"><Search size={20} /></button>
+        </form>
+
+        <nav className="ml-auto flex items-center gap-4">
+          <Link href="/wishlist"><Heart size={21} /></Link>
+          <Link href="/cart" className="relative">
+            <ShoppingCart size={21} />
+            {count > 0 && <span className="absolute -right-3 -top-3 rounded-full bg-brand-600 px-1.5 text-xs text-white">{count}</span>}
+          </Link>
+          {signedIn ? (
+            <Link href="/account" aria-label="My account"><User size={21} /></Link>
+          ) : (
+            <div className="hidden items-center gap-2 md:flex">
+              <Link href="/login" className="rounded-lg px-3 py-2 font-semibold">Sign in</Link>
+              <Link href="/register" className="rounded-lg bg-slate-900 px-3 py-2 font-semibold text-white">Create account</Link>
+            </div>
+          )}
+          {!signedIn && <Link href="/login" className="md:hidden" aria-label="Sign in"><User size={21} /></Link>}
+        </nav>
+      </div>
+    </header>
+  );
+}
