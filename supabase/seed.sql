@@ -1,0 +1,3 @@
+-- Deterministic catalog seed for Myshop.
+-- The connected Myshops project contains exactly 5 categories and 10 active seeded products.
+-- Product seed uses unique SKUs and slugs and creates media plus storage variants.
